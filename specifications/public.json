@@ -34,7 +34,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Details about a user",
+            "description": "Details about a person",
             "headers": {
               "x-next": {
                 "description": "A link to the next page of responses",
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Person"
                 }
               }
             }
@@ -67,7 +67,7 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "Person": {
         "type": "object",
         "required": [
           "id",
