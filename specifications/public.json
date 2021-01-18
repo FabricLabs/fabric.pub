@@ -27,8 +27,7 @@
             "description": "Network handle of the person",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
