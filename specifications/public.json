@@ -117,7 +117,12 @@
   "components": {
     "schemas": {
       "QueryResult": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            }
+        }
       },
       "Person": {
         "type": "object",
