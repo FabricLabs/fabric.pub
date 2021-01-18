@@ -127,8 +127,7 @@
       "Person": {
         "type": "object",
         "required": [
-          "id",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
