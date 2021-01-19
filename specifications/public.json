@@ -114,10 +114,32 @@
             }
         },
         "/people/:id": {
-           "get": {
+            "get": {
                 "summary": "Get details of a person",
-                "operationId": "viewPerson"
-           } 
+                "operationId": "viewPerson",
+                "responses": {
+                    "200": {
+                        "description": "PersonProfile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PersonProfile"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
