@@ -115,8 +115,8 @@
         },
         "/people/:id": {
            "get": {
-                "summary": "List people",
-                "operationId": "listPeople"
+                "summary": "Get details of a person",
+                "operationId": "viewPerson"
            } 
         }
     },
