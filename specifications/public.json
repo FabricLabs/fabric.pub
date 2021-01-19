@@ -112,6 +112,12 @@
                     }
                 }
             }
+        },
+        "/people/:id": {
+           "get": {
+                "summary": "List people",
+                "operationId": "listPeople"
+           } 
         }
     },
     "components": {
