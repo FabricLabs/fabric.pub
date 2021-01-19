@@ -45,7 +45,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Person"
+                                    "$ref": "#/components/schemas/PersonList"
                                 }
                             }
                         }
