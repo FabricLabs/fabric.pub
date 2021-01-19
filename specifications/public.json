@@ -178,6 +178,17 @@
                     }
                 }
             },
+            "PersonList": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
             "Error": {
                 "type": "object",
                 "required": [
