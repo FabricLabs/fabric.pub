@@ -116,6 +116,7 @@
         "/people/{username}": {
             "get": {
                 "summary": "Get details of a person",
+                "description": "Get a Person's profile.",
                 "operationId": "viewPerson",
                 "responses": {
                     "200": {
