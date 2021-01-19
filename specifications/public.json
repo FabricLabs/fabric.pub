@@ -127,13 +127,14 @@
             "Person": {
                 "type": "object",
                 "required": [
-                    "id"
+                    "id",
+                    "username"
                 ],
                 "properties": {
                     "id": {
                         "type": "string"
                     },
-                    "name": {
+                    "username": {
                         "type": "string"
                     }
                 }
