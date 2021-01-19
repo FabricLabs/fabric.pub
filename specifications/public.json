@@ -179,7 +179,7 @@
                 }
             },
             "PersonList": {
-                "type": "Array"
+                "type": "array"
             },
             "Error": {
                 "type": "object",
