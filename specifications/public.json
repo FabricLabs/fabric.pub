@@ -179,15 +179,7 @@
                 }
             },
             "PersonList": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    }
-                }
+                "type": "Array"
             },
             "Error": {
                 "type": "object",
