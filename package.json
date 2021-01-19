@@ -1,0 +1,33 @@
+{
+  "name": "fabric.pub",
+  "version": "0.1.0",
+  "description": "public endpoints for Fabric resources",
+  "main": "scripts/http.js",
+  "dependencies": {
+    "@fabric/core": "github:martindale/fabric#docs-update"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/FabricLabs/fabric.pub.git"
+  },
+  "keywords": [
+    "fabric",
+    "bitcoin",
+    "http",
+    "web",
+    "lightning",
+    "rootstock"
+  ],
+  "author": "Fabric Labs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FabricLabs/fabric.pub/issues"
+  },
+  "homepage": "https://github.com/FabricLabs/fabric.pub#readme"
+}
