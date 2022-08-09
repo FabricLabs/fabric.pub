@@ -4,7 +4,7 @@
   "description": "public endpoints for Fabric resources",
   "main": "scripts/http.js",
   "dependencies": {
-    "@fabric/core": "github:martindale/fabric#docs-update"
+    "@fabric/core": "github:FabricLabs/fabric#feature/node-16"
   },
   "devDependencies": {
     "http-server": "^0.12.3"
