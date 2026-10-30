@@ -4,13 +4,18 @@
   "description": "public endpoints for Fabric resources",
   "main": "scripts/http.js",
   "dependencies": {
-    "@fabric/core": "github:FabricLabs/fabric#feature/node-16"
+    "@fabric/core": "FabricLabs/fabric#feature/passport-v2",
+    "@fabric/http": "FabricLabs/fabric-http#feature/passport-v2"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "mocha": "=12.0.3"
   },
   "scripts": {
-    "test": "mocha"
+    "build": "node scripts/build.js",
+    "report:install": "rm -rf node_modules && mkdir -p reports && rm -f package-lock.json && echo \"$ npm i --allow-git=all\" > reports/install.log && npm i --allow-git=all >> reports/install.log 2>&1",
+    "start": "fabric-http assets",
+    "test": "mocha tests"
   },
   "repository": {
     "type": "git",
