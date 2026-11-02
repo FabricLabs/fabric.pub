@@ -45,6 +45,20 @@ describe('HomePage', function () {
     assert.ok(html.includes('<meta property="og:url" content="https://example.com/?a=1&amp;b=2" />'));
   });
 
+  it('keeps its trusted title entities but cannot break out of og:title', function () {
+    const html = new HomePage({ title: 'Fabric &bull; "beta" <b>' }).toHTML();
+    assert.ok(html.includes('<meta property="og:title" content="Fabric &bull; &quot;beta&quot; <b>" />'));
+  });
+
+  it('does not share default copy between instances', function () {
+    const first = new HomePage();
+    first.settings.sections.push([{ p: 'only on the first page' }]);
+    first.settings.stylesheets.push('/first.css');
+    const html = new HomePage().toHTML();
+    assert.ok(!html.includes('only on the first page'));
+    assert.ok(!html.includes('/first.css'));
+  });
+
   it('refuses unknown blocks', function () {
     const page = new HomePage({ sections: [[{ blink: 'nope' }]] });
     assert.throws(() => page.toHTML(), /Unknown block/);

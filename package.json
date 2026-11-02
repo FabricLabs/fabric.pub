@@ -4,11 +4,11 @@
   "description": "public endpoints for Fabric resources",
   "main": "scripts/http.js",
   "dependencies": {
-    "@fabric/core": "FabricLabs/fabric#feature/passport-v2",
-    "@fabric/http": "FabricLabs/fabric-http#feature/passport-v2"
+    "@fabric/core": "FabricLabs/fabric#feature/passport",
+    "@fabric/http": "FabricLabs/fabric-http#feature/passport"
   },
   "devDependencies": {
-    "http-server": "^0.12.3",
+    "http-server": "=14.1.1",
     "mocha": "=12.0.3"
   },
   "scripts": {
@@ -29,10 +29,21 @@
     "lightning",
     "rootstock"
   ],
+  "engines": {
+    "node": "26.12.1",
+    "npm": ">=12.0.0"
+  },
   "author": "Fabric Labs",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FabricLabs/fabric.pub/issues"
   },
-  "homepage": "https://github.com/FabricLabs/fabric.pub#readme"
+  "homepage": "https://github.com/FabricLabs/fabric.pub#readme",
+  "overrides": {
+    "glob@>=9.0.0 <14.0.2": "=14.0.3",
+    "minimatch@>=9.0.0 <11.0.1": "=11.0.3",
+    "page": {
+      "path-to-regexp": "=1.9.0"
+    }
+  }
 }

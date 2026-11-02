@@ -9,7 +9,9 @@ async function main (input = {}) {
   const page = new HomePage(input);
   const target = path.resolve(__dirname, '..', 'assets', 'index.html');
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.writeFileSync(target, page.toHTML());
+  const temporary = `${target}.${process.pid}.tmp`;
+  fs.writeFileSync(temporary, page.toHTML());
+  fs.renameSync(temporary, target);
   return { target };
 }
 

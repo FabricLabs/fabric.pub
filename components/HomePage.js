@@ -79,7 +79,7 @@ class HomePage extends FabricComponent {
     this.settings = Object.assign({
       handle: 'fabric-pub-home',
       path: '/'
-    }, DEFAULTS, settings);
+    }, JSON.parse(JSON.stringify(DEFAULTS)), settings);
 
     this._state = {
       content: {
@@ -174,7 +174,7 @@ ${stylesheets}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:url" content="${escapeHtml(page.url)}" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="${page.title}" />
+    <meta property="og:title" content="${String(page.title).replace(/"/g, '&quot;')}" />
     <meta property="og:description" content="${escapeHtml(page.description)}" />
     <meta property="og:image" content="${escapeHtml(page.image)}" />
   </head>
