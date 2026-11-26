@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>The HTTP and Hub edge · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Where JSON becomes Fabric fields, how Hub signer rules fail closed, and how a document list price is marked up." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/edge.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/edge.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="The HTTP and Hub edge · Fabric" />
+    <meta property="og:description" content="Where JSON becomes Fabric fields, how Hub signer rules fail closed, and how a document list price is marked up." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">10 of 10</p>
+      <h1>The HTTP and Hub edge</h1>
+      <p class="subtitle">JSON at the door. The protocol stays on the other side of it.</p>
+
+      <section>
+        <h2>The bridge</h2>
+        <p>HTTP accepts JSON. Core peers speak typed fields. <code>examples/message-bridge.js</code> is that translation for a ping and for a sidechain patch. <code>examples/wire-catalog.js</code> in the Hub repository checks that the Hub's names for <code>JSONCall</code> and <code>P2P_CHAT_MESSAGE</code> still match the opcodes in <code>@fabric/core</code>.</p>
+      </section>
+
+      <section>
+        <h2>Sign, decline, ask</h2>
+        <p>Signer rules sign or decline each request by amount, destination, site, and rate, and they never sign anything they do not clearly allow. A decline wins over a sign for the same scope. A rule with an unknown field is invalid, and while any rule is invalid the Hub asks instead of signing.</p>
+        <p>Every signing decision is logged. A request no rule settles waits for you to approve. A federation withdrawal needs a maximum amount on the sign rule. Without that cap, it is not signed.</p>
+        <p><code>examples/signer-rules.js</code> checks those four outcomes. It does not hold a key.</p>
+      </section>
+
+      <section>
+        <h2>A price, then a floor</h2>
+        <p>The document-markup script starts from a remote cost and the default markup, 10 percent. A cost of 1000 sats lists at 1100. A price above zero is at least the smallest payment a mainnet HTLC can settle. A cost of zero stays free.</p>
+        <p class="limit">Paid file sales work today on Bitcoin test networks, regtest and signet.</p>
+        <pre><code>node scripts/example-tutorials.js</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/">All walkthroughs</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

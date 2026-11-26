@@ -1,70 +1,64 @@
 'use strict';
 
 const FabricComponent = require('@fabric/http/types/component');
+const { renderArticle, renderDocument } = require('./document');
 
 /**
- * Copy for the fabric.pub home page. Fields marked "trusted HTML" are written
- * as-is (entities and inline markup allowed); everything else is escaped.
+ * Copy for the fabric.pub home page. Fields marked trusted HTML are written
+ * as-is. Links, code samples, and plain labels are escaped.
  */
 const DEFAULTS = {
-  // Trusted HTML; used for `<title>` and `og:title`.
-  title: 'Fabric &bull; the decentralized operating system',
+  title: 'Fabric',
   url: 'https://fabric.pub/',
-  description: 'Fabric Labs is building a new kind of OS — safe, secure, and completely private by default.  Now accepting applications for our Developer Support Program!',
-  image: 'https://fabric.pub/assets/truth-is-stronger-than-illusions.jpg',
-  stylesheets: ['/assets/tufte.css', '/assets/latex.css'],
-  // Trusted HTML.
-  heading: 'Welcome to <strong>Fabric</strong>, friend.',
-  // Trusted HTML.
-  subtitle: 'An <abbr title="3BZssGaw5HJEeZPhQDR3ExSqfSn1sFWb46">Operating System</abbr> for the world\'s most powerful supercomputer.',
-  // Each section is a list of blocks: `{ h2 | h3 | p: <trusted HTML>, style? }`
-  // or `{ links: [{ href, label }] }`.
+  path: '/',
+  description: 'Fabric is a protocol and reference client for peer-to-peer agreements, with Bitcoin as the settlement and bonding layer.',
+  image: 'https://fabric.pub/favicon.svg',
+  stylesheets: ['/site.css'],
+  heading: 'Fabric',
+  subtitle: 'Peer-to-peer agreements, settled in Bitcoin.',
   sections: [
     [
-      { h2: 'Getting started is easy.  <a href="https://chat.fabric.pub/#/group/+labs:fabric.pub"><strong>Join the Community</strong> &raquo;</a>' },
-      { p: 'We\'re finalizing the release of <a href="https://github.com/FabricLabs/fabric"><code>@fabric/core</code></a>, an initial set of <a href="https://dev.fabric.pub">developer-focused APIs</a> for interacting with Fabric.  For early access, <a href="https://chat.fabric.pub">join <strong>Grove</strong></a>, our community chat.' }
+      { h2: 'Coordinate directly' },
+      { p: 'Fabric lets people coordinate and pay each other directly, with Bitcoin as the settlement layer and no company in the middle.' },
+      { p: 'It is a protocol and reference client for those agreements. <code>@fabric/core</code>, <code>@fabric/http</code>, and Fabric Hub are the stack you build on.' },
+      { limit: '<code>@fabric/core</code> v0.1.0 is a release candidate.' }
     ],
     [
-      { h3: 'Learning to Code?' },
-      { p: 'You\'re in the right place.  We offer mentorships in <a href="https://chat.fabric.pub/#/room/#mentorships:fabric.pub">the <code>#mentorships:fabric.pub</code> channel</a> for anyone with the desire to learn!' }
+      { h2: 'Read the protocol' },
+      { p: 'Ten walkthroughs follow one path, from how peers talk to where HTTP and the Hub sit. Each one names an offline script in the matching repository.' },
+      { p: 'The scripts generate keys in memory, check a few facts, and exit. They do not listen, and they do not start Bitcoin or Lightning.' },
+      { p: '<a href="/learn/">Read the walkthroughs</a>' }
     ],
     [
-      { h3: 'Finding Us Elsewhere' },
-      { p: 'As we prepare for launch, we\'ll make announcements through <a href="https://twitter.com/FabricProtocol" rel="me">our official Twitter</a>, but many other materials are available in the meantime.  See below, or see you around!' },
-      { p: '&mdash; the Fabric Team', style: 'text-align: right;' },
+      { h2: 'Run Fabric Hub' },
+      { p: 'Fabric Hub desktop installs on macOS, Windows, and Linux. On Mac it needs macOS 13 or later. Setup downloads and manages Bitcoin Core and Core Lightning for you. On Windows, the app manages Bitcoin Core only; Lightning isn\'t included.' },
+      { p: 'Sign in to Fabric sites with your own key. Passport checks that the request comes from the site your browser actually shows. Pair Passport with a Hub, or with another signer, by comparing a six-digit code.' },
+      { p: 'A public Hub is at <a href="https://hub.fabric.pub">hub.fabric.pub</a>.' }
+    ],
+    [
+      { h2: 'In use' },
+      {
+        list: [
+          '<a href="https://goon.vc">GoonCitizen</a> relays Star Citizen gameplay from your game log to a live dashboard, and only reads the log. Its groups share Bitcoin wallets that need several members to sign.',
+          'Sensemaker is a self-hosted suite for gathering and analyzing information toward goals you set.',
+          'Doorman is a community bot for Discord, Slack, and Matrix that welcomes new members and runs onboarding, extended with plugins.',
+          'Soundtrack is a self-hosted app for listening to music together.'
+        ]
+      }
+    ],
+    [
+      { h2: 'Source' },
       {
         links: [
-          { href: 'https://github.com/FabricLabs', label: 'GitHub' },
-          { href: 'https://fabric.fm', label: 'Mailing List' },
-          { href: 'https://dev.fabric.pub', label: 'Documentation' },
-          { href: 'https://twitter.com/FabricProtocol', label: '@FabricProtocol' }
+          { href: 'https://github.com/FabricLabs/fabric', label: '@fabric/core' },
+          { href: 'https://github.com/FabricLabs/fabric-http', label: '@fabric/http' },
+          { href: 'https://github.com/FabricLabs/hub.fabric.pub', label: 'Fabric Hub' },
+          { href: '/learn/', label: 'Walkthroughs' }
         ]
       }
     ]
-  ],
-  // Unpublished sections, kept in the page source as HTML comments.
-  drafts: [
-    [
-      { h2: 'Serverless?' },
-      { p: 'Tired of the risks imposed by trusted third parties, we\'ve decided to design a new software architecture that is <strong>easier to use</strong>, <strong>safer to run</strong>, and <strong>more resilient to attack</strong>.' },
-      { p: 'To accomplish our goals, we\'re removing servers from the equation and going <strong>entirely peer-to-peer</strong>.' },
-      { h3: 'Encrypted by Default' },
-      { p: 'Fabric uses high-power encryption to secure communications across the network, ensuring that <em>user privacy is preserved by default</em>.' },
-      { h3: 'People over Profit' },
-      { p: 'Rather than enforcing arbitrary decisions "for the good of the community", Fabric is an open-source, offline-first protocol that gives users the ultimate power of their own experiences.  Applications published in the Fabric network are shared as "source code", with their behaviors and functionality clearly described in human-readible form.' }
-    ]
   ]
 };
-
-const BLOCK_TAGS = ['h2', 'h3', 'p'];
-
-function escapeHtml (value) {
-  return String(value == null ? '' : value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
 
 /**
  * The fabric.pub home page as a Fabric HTTP component.
@@ -85,55 +79,17 @@ class HomePage extends FabricComponent {
       content: {
         title: this.settings.title,
         url: this.settings.url,
+        path: this.settings.path,
         description: this.settings.description,
         image: this.settings.image,
         stylesheets: this.settings.stylesheets,
         heading: this.settings.heading,
         subtitle: this.settings.subtitle,
-        sections: this.settings.sections,
-        drafts: this.settings.drafts
+        sections: this.settings.sections
       }
     };
 
     return this;
-  }
-
-  _renderBlock (block) {
-    if (block.links) {
-      const items = block.links
-        .map((link) => `            <li><a href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
-        .join('\n');
-      return `        <p>
-          <ul>
-${items}
-          </ul>
-        </p>`;
-    }
-
-    const tag = BLOCK_TAGS.find((name) => block[name] !== undefined);
-    if (!tag) throw new Error(`Unknown block: ${JSON.stringify(block)}`);
-    const style = block.style ? ` style="${escapeHtml(block.style)}"` : '';
-    return `        <${tag}${style}>${block[tag]}</${tag}>`;
-  }
-
-  _renderBlocks (blocks) {
-    return blocks.map((block, index) => {
-      const html = this._renderBlock(block);
-      const isHeading = block.h2 !== undefined || block.h3 !== undefined;
-      return (index > 0 && isHeading) ? `\n${html}` : html;
-    }).join('\n');
-  }
-
-  _renderSection (blocks) {
-    return `      <section>
-${this._renderBlocks(blocks)}
-      </section>`;
-  }
-
-  _renderDraft (blocks) {
-    return `      <!-- <section>
-${this._renderBlocks(blocks)}
-      </section> -->`;
   }
 
   /**
@@ -143,15 +99,7 @@ ${this._renderBlocks(blocks)}
    */
   _getInnerHTML (state) {
     const page = Object.assign({}, this.state, state || {});
-    const sections = page.sections.map((blocks) => this._renderSection(blocks))
-      .concat(page.drafts.map((blocks) => this._renderDraft(blocks)));
-
-    return `<article>
-      <h1>${page.heading}</h1>
-      <p class="subtitle">${page.subtitle}</p>
-
-${sections.join('\n\n')}
-    </article>`;
+    return renderArticle(page);
   }
 
   /**
@@ -161,29 +109,9 @@ ${sections.join('\n\n')}
    */
   toHTML (state) {
     const page = Object.assign({}, this.state, state || {});
-    const stylesheets = page.stylesheets
-      .map((href) => `    <link rel="stylesheet" href="${escapeHtml(href)}" />`)
-      .join('\n');
-
-    return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>${page.title}</title>
-${stylesheets}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:url" content="${escapeHtml(page.url)}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="${String(page.title).replace(/"/g, '&quot;')}" />
-    <meta property="og:description" content="${escapeHtml(page.description)}" />
-    <meta property="og:image" content="${escapeHtml(page.image)}" />
-  </head>
-
-  <body>
-    ${this._getInnerHTML(page)}
-  </body>
-</html>
-`;
+    return renderDocument(Object.assign({}, page, {
+      article: this._getInnerHTML(page)
+    }));
   }
 }
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Three keys from one seed · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How one Fabric seed splits into an identity, a Bitcoin wallet, and a cosigner, and how a Hub uses that split." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/keys.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/keys.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Three keys from one seed · Fabric" />
+    <meta property="og:description" content="How one Fabric seed splits into an identity, a Bitcoin wallet, and a cosigner, and how a Hub uses that split." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">05 of 10</p>
+      <h1>Three keys from one seed</h1>
+      <p class="subtitle">The master derives. Applications sign with the children.</p>
+
+      <section>
+        <h2>Identity, wallet, cosigner</h2>
+        <p>One seed becomes three keys: a Fabric identity, a Bitcoin wallet, and a BIP87 cosigner. The public keys differ. A signature from one cannot be checked as another.</p>
+      </section>
+
+      <section>
+        <h2>The Hub uses the same split</h2>
+        <p>A Hub's root key only derives. Account 0 on the Hub's network yields an identity, for messages and attestations, and a cosigner, for federations and the Beacon. The root public key is a third value. It is not either of those signers.</p>
+        <p><code>examples/operator-keys.js</code> in the Fabric Hub repository checks that split on regtest. The words exist only in memory.</p>
+        <pre><code>node scripts/example-tutorials.js</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/passport.html">Next: Passport sign-in</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

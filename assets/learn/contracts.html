@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Application resource contracts · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How a Fabric contract is published on the same gossip network: genesis, members, and a spend that cites the tip." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/contracts.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/contracts.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Application resource contracts · Fabric" />
+    <meta property="og:description" content="How a Fabric contract is published on the same gossip network: genesis, members, and a spend that cites the tip." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">02 of 10</p>
+      <h1>Application resource contracts</h1>
+      <p class="subtitle">Gossip moves bytes. A contract is the agreement those bytes refer to.</p>
+
+      <section>
+        <h2>The same envelopes</h2>
+        <p>An application resource contract is not a new family of wire types. Three public messages carry it.</p>
+        <ul>
+            <li><code>CONTRACT_PUBLISH</code> is the genesis.</li>
+            <li><code>CONTRACT_MESSAGE</code> is an event inside that namespace. The body names the contract.</li>
+            <li><code>CONTRACT_PROPOSAL</code> batches messages, with a Merkle root, a JSON patch, and an optional PSBT.</li>
+        </ul>
+        <p>Names such as <code>GroupChat</code> live in the body. They are not outer opcodes.</p>
+      </section>
+
+      <section>
+        <h2>The first page sets the rules</h2>
+        <p>A genesis names which message types are in bounds, who may read, who may sign, and the threshold, how the tip maps to a Bitcoin Taproot output, and a Bitcoin block hash that ties publication to the chain. An empty list of message types denies every body.</p>
+      </section>
+
+      <section>
+        <h2>First writer wins</h2>
+        <p>The namespace id comes from that genesis. A second signed genesis for the same id is a different envelope. The register keeps the first.</p>
+      </section>
+
+      <section>
+        <h2>Same bytes, same fold</h2>
+        <p>Publishers and participants ingest the same signed frame, from the mesh or as a <code>fabric:</code> string. Fold order is the message hash, so arrival order does not pick the winner. That is why a relay has to forward the original bytes. A rewritten frame would make honest copies of the contract diverge.</p>
+        <p>A peer can still flood a <code>CONTRACT_MESSAGE</code> for a namespace it has never opened. Applications ignore ids they do not keep.</p>
+      </section>
+
+      <section>
+        <h2>A valid envelope is not enough</h2>
+        <p>Anyone can gossip a frame. Changing membership or the spend policy requires the author to already be a signer, or to present a verified sign token for this contract. Chat under the contract is for its readers and signers. It is not the public shoutbox.</p>
+        <p>A withdrawal has to cite the tip's state digest and the Bitcoin block hash it claims. A stale binding is refused. A local program run is a commitment to a computation. It does not, by itself, change the Taproot address.</p>
+      </section>
+
+      <section>
+        <h2>Where to check the envelope</h2>
+        <p>These frames ride the gossip path. The tutorial runner checks a signed envelope, not a full contract fold. That check is <code>examples/fabric-basic-usage.js</code> in <code>@fabric/core</code>.</p>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/messages.html">Next: Message bodies</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

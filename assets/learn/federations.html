@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Named federations · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How several Hubs share one Bitcoin vault, and why the same keys can still have two addresses." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/federations.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/federations.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Named federations · Fabric" />
+    <meta property="og:description" content="How several Hubs share one Bitcoin vault, and why the same keys can still have two addresses." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">08 of 10</p>
+      <h1>Named federations</h1>
+      <p class="subtitle">A descriptor, a threshold, and a vault every member can derive.</p>
+
+      <section>
+        <h2>Who, and how many</h2>
+        <p>Several Hubs can form a federation with one shared Bitcoin vault. Nothing is signed without each operator's approval. The descriptor names the validators, the threshold, the network, and a publisher who is one of those keys. Its id is a hash of that descriptor, so the order of the validators does not change it.</p>
+      </section>
+
+      <section>
+        <h2>Two addresses, same keys</h2>
+        <p>The Hub's default internal key is <code>nums</code>, so vaults that already hold coins keep their address. The same keys with <code>musig2</code> produce a different address. Coins on the first address stay there until someone sweeps them.</p>
+        <p><code>examples/federation-vault.js</code> checks both addresses for two fresh keys and a threshold of 2, on regtest. Nothing is broadcast, and nothing is scanned.</p>
+        <pre><code>node examples/federation-vault.js</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/sidechain.html">Next: Sidechain and Beacon</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

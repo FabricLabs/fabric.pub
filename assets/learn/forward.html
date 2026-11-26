@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Directed forward · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How a Fabric message is addressed to one next hop, so the path stays a line instead of a flood." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/forward.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/forward.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Directed forward · Fabric" />
+    <meta property="og:description" content="How a Fabric message is addressed to one next hop, so the path stays a line instead of a flood." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">04 of 10</p>
+      <h1>Directed forward</h1>
+      <p class="subtitle">One next hop at a time, when the square should not hear it.</p>
+
+      <section>
+        <h2>The flood is readable</h2>
+        <p>A mesh flood can be read by every hop. That is the right tool for the shoutbox. It is the wrong tool when the path should stay a line.</p>
+      </section>
+
+      <section>
+        <h2>The outer layer names one peer</h2>
+        <p>A <code>P2P_FORWARD</code> body is the next peer, a time to live, and an inner frame. Only the next hop is named on the outside. The rest of the path is inside the wrap.</p>
+      </section>
+
+      <section>
+        <h2>Each hop unwraps once</h2>
+        <p>That hop checks that it is the named peer, peels one layer, and finds a smaller forward, or the payload. The time to live counts down. The last inner frame in the tutorial is a signed chat message, <code>hello via onion</code>.</p>
+      </section>
+
+      <section>
+        <h2>Check it</h2>
+        <p><code>examples/onion-forward.js</code> in <code>@fabric/core</code> builds a two-hop path and peels it. No port is opened. The live path is <code>Peer#sendOnion</code>.</p>
+        <pre><code>node examples/onion-forward.js</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/keys.html">Next: Three keys from one seed</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

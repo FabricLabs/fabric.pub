@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Linked signers · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Passport pairs with a Hub by a six-digit code, and how a grant in a request body is not itself a signature." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/signers.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/signers.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Linked signers · Fabric" />
+    <meta property="og:description" content="How Passport pairs with a Hub by a six-digit code, and how a grant in a request body is not itself a signature." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">07 of 10</p>
+      <h1>Linked signers</h1>
+      <p class="subtitle">Compare a code, then grant a scope. A request does not sign by itself.</p>
+
+      <section>
+        <h2>Six digits, both sides</h2>
+        <p>Pair Passport with a Hub, or with another signer, by comparing a six-digit code. Compare it before either side grants anything. Each participant keeps its own key.</p>
+      </section>
+
+      <section>
+        <h2>A grant is a scope</h2>
+        <p>A grant names the other signer and the scopes it covers, such as <code>message</code>. The grant is not a signature on a later request. What the grant allows is decided by signer rules, on the last page of this path.</p>
+      </section>
+
+      <section>
+        <h2>Check it</h2>
+        <p><code>examples/delegation-body.js</code> in <code>@fabric/http</code> puts a <code>fabric:</code> grant in a JSON body, reads it back, and then refuses the next call once the rate limit is spent. No socket is opened.</p>
+        <pre><code>node examples/delegation-body.js</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/federations.html">Next: Named federations</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -3,21 +3,26 @@
 const fs = require('fs');
 const path = require('path');
 
-const HomePage = require('../components/HomePage');
+const { siteDocuments } = require('../components/site');
 
-async function main (input = {}) {
-  const page = new HomePage(input);
-  const target = path.resolve(__dirname, '..', 'assets', 'index.html');
+function write (file, html) {
+  const target = path.resolve(__dirname, '..', file);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   const temporary = `${target}.${process.pid}.tmp`;
-  fs.writeFileSync(temporary, page.toHTML());
+  fs.writeFileSync(temporary, html);
   fs.renameSync(temporary, target);
-  return { target };
+  return target;
 }
 
-main().catch((exception) => {
+function main () {
+  const written = siteDocuments().map((document) => write(document.file, document.html));
+  return { written };
+}
+
+try {
+  const output = main();
+  console.log('[BUILD:SITE]', '[OUTPUT]', output);
+} catch (exception) {
   console.error('[BUILD:SITE]', '[EXCEPTION]', exception);
   process.exitCode = 1;
-}).then((output) => {
-  if (output) console.log('[BUILD:SITE]', '[OUTPUT]', output);
-});
+}

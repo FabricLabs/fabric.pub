@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>How peers talk · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How the public Fabric network carries a signed message from neighbor to neighbor without rewriting it." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/gossip.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/gossip.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How peers talk · Fabric" />
+    <meta property="og:description" content="How the public Fabric network carries a signed message from neighbor to neighbor without rewriting it." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">01 of 10</p>
+      <h1>How peers talk</h1>
+      <p class="subtitle">Peers on different computers, carrying signed messages for each other.</p>
+
+      <section>
+        <h2>A network with no center</h2>
+        <p>The public Fabric network is not a site you log into. It is programs, called peers, that speak the same protocol. Each peer remembers a few neighbors. Messages hop from neighbor to neighbor. That pattern is gossip.</p>
+      </section>
+
+      <section>
+        <h2>You are a key</h2>
+        <p>A peer is a key, not a username. When you send a public message, you sign it. Anyone can check the signature. A relay that carries the message does not become the author.</p>
+      </section>
+
+      <section>
+        <h2>A hallway, then the square</h2>
+        <p>Before gossip, two peers open a TCP connection and wrap it in NOISE. Ping and pong live in that session. Gossip starts once the session is up. The default listen port is 7777.</p>
+      </section>
+
+      <section>
+        <h2>A signed envelope</h2>
+        <p>A public message is an AMP frame: a 208-byte header, then a body. The header names the author and the message type, and it carries a double-SHA256 of the body. Peers drop a frame whose hash does not match the body, then check the BIP340 signature.</p>
+        <p>When those checks pass, the peer forwards the same bytes. It does not re-sign, and it does not rewrite the message to count the hop. Your signature still verifies after the frame has passed through strangers.</p>
+      </section>
+
+      <section>
+        <h2>What is public</h2>
+        <p>Some messages are flooded: discovery, a nickname, the shoutbox, a contract namespace, a Bitcoin block tip. The shoutbox, <code>P2P_CHAT_MESSAGE</code>, is cleartext. Every hop can read it. That is the public square.</p>
+        <p>Private delivery does not use that flood. It uses a directed forward, covered later in this path.</p>
+      </section>
+
+      <section>
+        <h2>Check it</h2>
+        <p><code>examples/fabric-basic-usage.js</code> in <code>@fabric/core</code> signs one chat message, <code>Hello, Fabric.</code>, and verifies it with the same key. A new message has a genesis parent: 32 zero bytes.</p>
+        <p><code>scripts/gossip-relay.js</code> starts one peer that validates and floods. No Hub HTTP, no Bitcoin wallet, and no documents.</p>
+        <pre><code>npm run example:tutorials</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/contracts.html">Next: Application resource contracts</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

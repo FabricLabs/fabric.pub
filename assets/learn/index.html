@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Protocol walkthroughs</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ten reading walkthroughs for Fabric, from gossip to the HTTP and Hub edge, plus the offline scripts that check them." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/" />
+    <meta property="og:url" content="https://fabric.pub/learn/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Protocol walkthroughs" />
+    <meta property="og:description" content="Ten reading walkthroughs for Fabric, from gossip to the HTTP and Hub edge, plus the offline scripts that check them." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <h1>Protocol walkthroughs</h1>
+      <p class="subtitle">First pictures of the local stack. The scripts are the check.</p>
+
+      <section>
+        <p>A reading path through the local stack. Gossip is how bytes move. The rest is what rides it, who holds the keys, and where HTTP and the Hub sit.</p>
+        <p>Each page below names the offline script that checks it. Run those from a clone of <code>@fabric/core</code>, <code>@fabric/http</code>, or Fabric Hub.</p>
+      </section>
+
+      <section>
+        <ol class="catalog">
+          <li>
+            <a href="/learn/gossip.html">
+              <span class="num">01</span>
+              <span class="catalog-body">
+                <strong>How peers talk</strong>
+                <span class="deck">Peers on different computers, carrying signed messages for each other.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/contracts.html">
+              <span class="num">02</span>
+              <span class="catalog-body">
+                <strong>Application resource contracts</strong>
+                <span class="deck">Gossip moves bytes. A contract is the agreement those bytes refer to.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/messages.html">
+              <span class="num">03</span>
+              <span class="catalog-body">
+                <strong>Message bodies</strong>
+                <span class="deck">The header says who signed. The body says what they said.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/forward.html">
+              <span class="num">04</span>
+              <span class="catalog-body">
+                <strong>Directed forward</strong>
+                <span class="deck">One next hop at a time, when the square should not hear it.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/keys.html">
+              <span class="num">05</span>
+              <span class="catalog-body">
+                <strong>Three keys from one seed</strong>
+                <span class="deck">The master derives. Applications sign with the children.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/passport.html">
+              <span class="num">06</span>
+              <span class="catalog-body">
+                <strong>Passport sign-in</strong>
+                <span class="deck">Your key answers a challenge from the site your browser is actually on.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/signers.html">
+              <span class="num">07</span>
+              <span class="catalog-body">
+                <strong>Linked signers</strong>
+                <span class="deck">Compare a code, then grant a scope. A request does not sign by itself.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/federations.html">
+              <span class="num">08</span>
+              <span class="catalog-body">
+                <strong>Named federations</strong>
+                <span class="deck">A descriptor, a threshold, and a vault every member can derive.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/sidechain.html">
+              <span class="num">09</span>
+              <span class="catalog-body">
+                <strong>Sidechain and Beacon</strong>
+                <span class="deck">A document with a clock, and one string for the epoch.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/learn/edge.html">
+              <span class="num">10</span>
+              <span class="catalog-body">
+                <strong>The HTTP and Hub edge</strong>
+                <span class="deck">JSON at the door. The protocol stays on the other side of it.</span>
+              </span>
+            </a>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Run the checks</h2>
+        <p>Each repository has <code>scripts/example-tutorials.js</code>. Every script exits on its own. None of them open a port, and none of them start Bitcoin or Lightning. The repositories require Node.js 26.13.0.</p>
+        <h3>@fabric/core</h3>
+        <p><code>npm run example:tutorials</code> signs and verifies one chat message, peels a directed forward, builds a collection plus one message, and does an in-memory get and set.</p>
+        <h3>@fabric/http</h3>
+        <p><code>npm run example:tutorials</code> issues a Passport challenge and redeems it once, translates a ping and a sidechain patch, and reads a <code>fabric:</code> grant from a request body.</p>
+        <h3>Fabric Hub</h3>
+        <p><code>node scripts/example-tutorials.js</code> checks the operator keys, the signer rules, the two vault addresses, the document markup, and the wire catalog.</p>
+        <pre><code>npm run example:tutorials</code></pre>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

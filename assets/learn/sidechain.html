@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Sidechain and Beacon · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How a sidechain patch names the clock and digest it was based on, and what a Beacon epoch seals." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/sidechain.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/sidechain.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sidechain and Beacon · Fabric" />
+    <meta property="og:description" content="How a sidechain patch names the clock and digest it was based on, and what a Beacon epoch seals." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">09 of 10</p>
+      <h1>Sidechain and Beacon</h1>
+      <p class="subtitle">A document with a clock, and one string for the epoch.</p>
+
+      <section>
+        <h2>A document with a clock</h2>
+        <p>Sidechain state is a version, a clock, and content. The digest hashes those three. The same state hashes the same. Two different states do not.</p>
+      </section>
+
+      <section>
+        <h2>One patch</h2>
+        <p>A patch is an RFC6902 list, the clock it was based on, and the digest from before the change. <code>examples/message-bridge.js</code> in <code>@fabric/http</code> sends one: add <code>/hello</code> with value <code>world</code>, at basis clock 0. The fields keep a canonical copy of that list, and the JSON view offers the same path back. There is no filesystem and no Hub in the script.</p>
+        <pre><code>node examples/message-bridge.js</code></pre>
+      </section>
+
+      <section>
+        <h2>The epoch</h2>
+        <p>A Beacon epoch seals that kind of state on the Hub's clock: the contracts root and the sidechain digest. Validators sign one string for the epoch. That seal is the Beacon's own record. It is not an application's <code>CONTRACT_MESSAGE</code> traffic.</p>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/edge.html">Next: The HTTP and Hub edge</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

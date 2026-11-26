@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Message bodies · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How a Fabric message body is a list of typed fields, with a genesis parent and a preimage that stays zero until there is a payment secret." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/messages.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/messages.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Message bodies · Fabric" />
+    <meta property="og:description" content="How a Fabric message body is a list of typed fields, with a genesis parent and a preimage that stays zero until there is a payment secret." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">03 of 10</p>
+      <h1>Message bodies</h1>
+      <p class="subtitle">The header says who signed. The body says what they said.</p>
+
+      <section>
+        <h2>A list of fields</h2>
+        <p>Each message type that has a schema lists its fields in order. <code>P2P_PING</code> is one field, <code>nonce</code>. The header hash is double-SHA256 of the body bytes. Peers drop a frame whose hash does not match.</p>
+      </section>
+
+      <section>
+        <h2>The first frame has no parent</h2>
+        <p>The header's <code>parent</code> is the id of the previous message, or 32 zero bytes when this frame starts a chain. The sign-and-verify script checks that a new message is still at genesis. Later durable frames set the parent before they sign.</p>
+      </section>
+
+      <section>
+        <h2>Zeros until there is a secret</h2>
+        <p>The <code>preimage</code> slot is a payment secret. Ordinary public messages leave it as 32 zero bytes. A circuit or an HTLC puts an explicit 32-byte secret there, and the payment hash is SHA256 of that secret. The slot is not a second copy of the body hash.</p>
+      </section>
+
+      <section>
+        <h2>Some bodies are just text</h2>
+        <p><code>P2P_CHAT_MESSAGE</code> carries UTF-8 with no field schema. That is the shoutbox frame from the first walkthrough.</p>
+      </section>
+
+      <section>
+        <h2>JSON lives at HTTP</h2>
+        <p>Peers speak fields. Browsers and HTTP speak JSON. <code>@fabric/http</code> is that door: <code>examples/message-bridge.js</code> turns a ping into fields and back, and it stores one sidechain patch as canonical fields while still offering the RFC6902 list to the page. It does not start a server.</p>
+        <pre><code>npm run example:tutorials</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/forward.html">Next: Directed forward</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

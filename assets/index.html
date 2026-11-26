@@ -2,57 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Fabric &bull; the decentralized operating system</title>
-    <link rel="stylesheet" href="/assets/tufte.css" />
-    <link rel="stylesheet" href="/assets/latex.css" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Fabric is a protocol and reference client for peer-to-peer agreements, with Bitcoin as the settlement and bonding layer." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/" />
     <meta property="og:url" content="https://fabric.pub/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Fabric &bull; the decentralized operating system" />
-    <meta property="og:description" content="Fabric Labs is building a new kind of OS — safe, secure, and completely private by default.  Now accepting applications for our Developer Support Program!" />
-    <meta property="og:image" content="https://fabric.pub/assets/truth-is-stronger-than-illusions.jpg" />
+    <meta property="og:title" content="Fabric" />
+    <meta property="og:description" content="Fabric is a protocol and reference client for peer-to-peer agreements, with Bitcoin as the settlement and bonding layer." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
   </head>
 
   <body>
-    <article>
-      <h1>Welcome to <strong>Fabric</strong>, friend.</h1>
-      <p class="subtitle">An <abbr title="3BZssGaw5HJEeZPhQDR3ExSqfSn1sFWb46">Operating System</abbr> for the world's most powerful supercomputer.</p>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <h1>Fabric</h1>
+      <p class="subtitle">Peer-to-peer agreements, settled in Bitcoin.</p>
 
       <section>
-        <h2>Getting started is easy.  <a href="https://chat.fabric.pub/#/group/+labs:fabric.pub"><strong>Join the Community</strong> &raquo;</a></h2>
-        <p>We're finalizing the release of <a href="https://github.com/FabricLabs/fabric"><code>@fabric/core</code></a>, an initial set of <a href="https://dev.fabric.pub">developer-focused APIs</a> for interacting with Fabric.  For early access, <a href="https://chat.fabric.pub">join <strong>Grove</strong></a>, our community chat.</p>
+        <h2>Coordinate directly</h2>
+        <p>Fabric lets people coordinate and pay each other directly, with Bitcoin as the settlement layer and no company in the middle.</p>
+        <p>It is a protocol and reference client for those agreements. <code>@fabric/core</code>, <code>@fabric/http</code>, and Fabric Hub are the stack you build on.</p>
+        <p class="limit"><code>@fabric/core</code> v0.1.0 is a release candidate.</p>
       </section>
 
       <section>
-        <h3>Learning to Code?</h3>
-        <p>You're in the right place.  We offer mentorships in <a href="https://chat.fabric.pub/#/room/#mentorships:fabric.pub">the <code>#mentorships:fabric.pub</code> channel</a> for anyone with the desire to learn!</p>
+        <h2>Read the protocol</h2>
+        <p>Ten walkthroughs follow one path, from how peers talk to where HTTP and the Hub sit. Each one names an offline script in the matching repository.</p>
+        <p>The scripts generate keys in memory, check a few facts, and exit. They do not listen, and they do not start Bitcoin or Lightning.</p>
+        <p><a href="/learn/">Read the walkthroughs</a></p>
       </section>
 
       <section>
-        <h3>Finding Us Elsewhere</h3>
-        <p>As we prepare for launch, we'll make announcements through <a href="https://twitter.com/FabricProtocol" rel="me">our official Twitter</a>, but many other materials are available in the meantime.  See below, or see you around!</p>
-        <p style="text-align: right;">&mdash; the Fabric Team</p>
-        <p>
-          <ul>
-            <li><a href="https://github.com/FabricLabs">GitHub</a></li>
-            <li><a href="https://fabric.fm">Mailing List</a></li>
-            <li><a href="https://dev.fabric.pub">Documentation</a></li>
-            <li><a href="https://twitter.com/FabricProtocol">@FabricProtocol</a></li>
-          </ul>
-        </p>
+        <h2>Run Fabric Hub</h2>
+        <p>Fabric Hub desktop installs on macOS, Windows, and Linux. On Mac it needs macOS 13 or later. Setup downloads and manages Bitcoin Core and Core Lightning for you. On Windows, the app manages Bitcoin Core only; Lightning isn't included.</p>
+        <p>Sign in to Fabric sites with your own key. Passport checks that the request comes from the site your browser actually shows. Pair Passport with a Hub, or with another signer, by comparing a six-digit code.</p>
+        <p>A public Hub is at <a href="https://hub.fabric.pub">hub.fabric.pub</a>.</p>
       </section>
 
-      <!-- <section>
-        <h2>Serverless?</h2>
-        <p>Tired of the risks imposed by trusted third parties, we've decided to design a new software architecture that is <strong>easier to use</strong>, <strong>safer to run</strong>, and <strong>more resilient to attack</strong>.</p>
-        <p>To accomplish our goals, we're removing servers from the equation and going <strong>entirely peer-to-peer</strong>.</p>
+      <section>
+        <h2>In use</h2>
+        <ul>
+            <li><a href="https://goon.vc">GoonCitizen</a> relays Star Citizen gameplay from your game log to a live dashboard, and only reads the log. Its groups share Bitcoin wallets that need several members to sign.</li>
+            <li>Sensemaker is a self-hosted suite for gathering and analyzing information toward goals you set.</li>
+            <li>Doorman is a community bot for Discord, Slack, and Matrix that welcomes new members and runs onboarding, extended with plugins.</li>
+            <li>Soundtrack is a self-hosted app for listening to music together.</li>
+        </ul>
+      </section>
 
-        <h3>Encrypted by Default</h3>
-        <p>Fabric uses high-power encryption to secure communications across the network, ensuring that <em>user privacy is preserved by default</em>.</p>
-
-        <h3>People over Profit</h3>
-        <p>Rather than enforcing arbitrary decisions "for the good of the community", Fabric is an open-source, offline-first protocol that gives users the ultimate power of their own experiences.  Applications published in the Fabric network are shared as "source code", with their behaviors and functionality clearly described in human-readible form.</p>
-      </section> -->
+      <section>
+        <h2>Source</h2>
+        <ul class="links">
+            <li><a href="https://github.com/FabricLabs/fabric">@fabric/core</a></li>
+            <li><a href="https://github.com/FabricLabs/fabric-http">@fabric/http</a></li>
+            <li><a href="https://github.com/FabricLabs/hub.fabric.pub">Fabric Hub</a></li>
+            <li><a href="/learn/">Walkthroughs</a></li>
+        </ul>
+      </section>
     </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
   </body>
 </html>

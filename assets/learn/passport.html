@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <title>Passport sign-in · Fabric</title>
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How a Fabric site issues a Passport challenge for a pinned origin, and how that challenge can be redeemed once." />
+    <meta name="theme-color" content="#4C1D95" />
+    <link rel="canonical" href="https://fabric.pub/learn/passport.html" />
+    <meta property="og:url" content="https://fabric.pub/learn/passport.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Passport sign-in · Fabric" />
+    <meta property="og:description" content="How a Fabric site issues a Passport challenge for a pinned origin, and how that challenge can be redeemed once." />
+    <meta property="og:image" content="https://fabric.pub/favicon.svg" />
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="wrap">
+      <header class="mast">
+        <a class="mark" href="/"><img src="/favicon.svg" width="28" height="28" alt="" /> Fabric</a>
+        <nav>
+          <a href="/learn/" aria-current="page">Learn</a>
+        </nav>
+      </header>
+      <main id="content">
+        <article>
+      <p class="kicker">06 of 10</p>
+      <h1>Passport sign-in</h1>
+      <p class="subtitle">Your key answers a challenge from the site your browser is actually on.</p>
+
+      <section>
+        <h2>The site names its own origin</h2>
+        <p>Sign in to a Fabric site with your own key. Passport checks that the request comes from the site your browser actually shows. A challenge is issued only for an origin on the relying party's list. The <code>Host</code> header does not add one.</p>
+      </section>
+
+      <section>
+        <h2>The identity key answers</h2>
+        <p>The signer checks that the origin it saw is the origin in the challenge, then signs an assertion with the identity key. The relying party checks the signature, the nonce, and the challenge hash.</p>
+      </section>
+
+      <section>
+        <h2>The challenge is spent</h2>
+        <p>Redeem takes the stored challenge. The first call opens a session. The public view has the identity and the origin, and it does not carry the session token. The second call finds no challenge left.</p>
+        <p>The HTTP side also keeps a binding secret. The browser holds that secret, so an assertion copied off the page cannot be redeemed on its own.</p>
+      </section>
+
+      <section>
+        <h2>Check it</h2>
+        <p><code>examples/passport-relying-party.js</code> in <code>@fabric/http</code> pins <code>https://example.com</code>, redeems once, and reads the session view. It does not listen.</p>
+        <pre><code>npm run example:tutorials</code></pre>
+      </section>
+
+      <section>
+        <p class="next"><a href="/learn/signers.html">Next: Linked signers</a></p>
+      </section>
+    </article>
+      </main>
+      <footer>
+        <p><a href="/">Fabric</a> · <a href="https://github.com/FabricLabs">Fabric Labs on GitHub</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
